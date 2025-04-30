@@ -46,8 +46,8 @@ const AdminDashboard = () => {
       </div>
 
       {/* Render the selected template */}
-      {adminData.template === "temp2" && <FoodStoreLanding />}
-      {/* {adminData.template === "temp2" && <AdminElectronicStoreTemplate />} */}
+      {adminData.template === "temp1" && <FoodStoreLanding />}
+      {adminData.template === "temp2" && <AdminElectronicStoreTemplate />}
     </div>
   );
 };
