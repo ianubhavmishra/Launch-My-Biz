@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 //app config
 const app = express()
 const port = 4000
-export const frontendURl = "http://localhost:5173"
+export const frontendURl = "https://launch-my-biz-s8b9.onrender.com"
 
 //middelware
 
