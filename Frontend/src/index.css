@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&family=Pacifico&display=swap');
+
+@import "tailwindcss";
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+
+
+*{
+  scroll-behavior: smooth;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20; /* Ensure it's above other content */
+    background-color: #fff;
+    /* Add additional styling for navbar */
+  }
+  
+  
+  
+  
+  .card-img-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card-img-top {
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Dark overlay for the image */
+  .card-img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Dark transparent overlay */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Show overlay and description on hover */
+  .card-img-container:hover .card-img-overlay {
+    opacity: 200;
+  }
+  
+  .card-img-overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+    color: #040303;  /* Ensure the text is visible against the dark background */
+    text-align: center;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .card-img-container:hover .card-img-overlay-content {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .card-img-container:hover .card-img-top {
+    opacity: 0.5; /* Decrease the opacity of the image */
+  }
