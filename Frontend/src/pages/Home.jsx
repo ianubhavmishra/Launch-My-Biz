@@ -89,12 +89,12 @@ export default function Home() {
 
     <div className="bg-gray-100 min-h-screen">
       <nav className="bg-white shadow-md py-4 px-2 sm:px-6 flex justify-between items-center fixed w-full top-0 z-100">
-        <h1 className="text-2xl font-bold text-blue-600 flex items-center">
+        <h1 className="text-lg sm:text-2xl font-bold text-blue-600 flex items-center">
           <img src="/LaunchMyBiz-logo.png" className="w-10 pr-1" /> Launch My Biz
         </h1>
         <div className="flex gap-4">
           {isSignedIn ? (
-            <div className='flex items-center gap-2 sm:gap-3'>
+            <div className='flex max-sm:w-10 items-center gap-2 sm:gap-3'>
               <p className='text-gray-600 max-sm:hidden'>Hi, {user.fullName}</p>
               <UserButton />
             </div>
@@ -107,14 +107,14 @@ export default function Home() {
       </nav>
 
       {/* main */}
-      <div className="relative w-full flex flex-col items-center text-center py-28 px-6 overflow-hidden mt-18">
+      <div className="relative w-full flex flex-col items-center text-center sm:py-28 py-18 px-6 overflow-hidden mt-17">
         <img
           src="bg.jpg"
           alt="Launch My Biz"
-          className="absolute inset-0 w-full h-full object-cover opacity-70 z-0"
+          className="absolute inset-0 sm:w-full sm:h-full object-cover opacity-70 z-0"
         />
 
-        <div className='absolute w-full text-center font-semibold  flex justify-center top-1/2 transform -translate-y-1/2'>
+        <div className='absolute sm:w-full text-center font-semibold  flex justify-center top-1/2 transform -translate-y-1/2'>
           <p className="text-[17px] sm:text-[20px] md:text-[24px] lg:text-[28px]">
             <i>Launch your business online on <span className="bg-yellow-300 px-2">Launch My Biz</span></i>
             <p></p>
@@ -123,24 +123,24 @@ export default function Home() {
         </div>
       </div>
 
-      {shopUrl ? <div className="flex flex-col md:flex-row items-center justify-center bg-gray-100 p-6 mt-9 rounded-xl shadow-xl border-2 border-gray-300 max-w-screen-xl mx-auto">
+      {shopUrl ? <div className="flex flex-col md:flex-row items-center justify-center bg-gray-100 mt-9 rounded-xl shadow-xl border-2 border-gray-300 max-sm:w-96 max-w-screen-xl mx-auto">
         {/* Left Side */}
         <div className="w-full md:w-1/2 p-5 border-b md:border-b-9 md:border-r border-gray-300 flex flex-col items-center justify-center">
           <iframe
             src={shopUrl}
             title="Site Preview"
-            className="w-full h-64 md:h-80 border rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
+            className="max-sm:h-44 w-full h-60 md:h-80 border rounded-lg shadow-lg hover:scale-105 transition-transform duration-300"
             style={{ overflow: 'hidden' }}
           // scrolling="no"
           ></iframe>
-          <a href={shopUrl} target="_blank" rel="noopener noreferrer" className="mt-5 bg-blue-600 text-white w-full text-center py-3 rounded-lg shadow-md transition-all duration-300 hover:bg-blue-800 hover:scale-105 hover:shadow-xl">
+          <a href={shopUrl} target="_blank" rel="noopener noreferrer" className="mt-5 bg-blue-600 text-white max-sm:w-80 w-full text-center py-3 max-sm:py-1 rounded-lg shadow-md transition-all duration-300 hover:bg-blue-800 hover:scale-105 hover:shadow-xl">
             Visit Site
           </a>
         </div>
 
         {/* Right Side */}
-        <div className="w-full xl:h-[30vw] md:w-1/2  p-5 flex flex-col items-center text-center justify-around">
-          <div className="xl:text-2xl font-bold bg-green-500 text-white py-3 px-2 w-full rounded-lg shadow-lg mb-5">
+        <div className="w-full xl:h-[30vw] md:w-1/2 p-5 flex flex-col items-center text-center justify-around">
+          <div className="xl:text-xl font-bold bg-green-500 text-white max-sm:py-1.5 py-3 px-2 w-full max-sm:w-80 rounded-lg shadow-lg mb-5">
             🥳 Congratulations Your site is Live ✈
           </div>
 
@@ -149,17 +149,17 @@ export default function Home() {
               type="text"
               value={shopUrl}
               readOnly
-              className="w-full p-3 border rounded-lg text-center text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-50"
+              className="w-full p-3 max-sm:p-1 border rounded-lg text-center text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-50"
             />
             <button
               onClick={copyToClipboard}
-              className="mt-3 w-full bg-gray-600 text-white px-5 py-2 rounded-lg shadow-md transition-all duration-300 hover:bg-gray-800 hover:scale-105 hover:shadow-lg"
+              className="mt-3 w-full bg-gray-600 text-white px-5 py-2 max-sm:p-1 rounded-lg shadow-md transition-all duration-300 hover:bg-gray-800 hover:scale-105 hover:shadow-lg"
             >
               {copied ? "✅ Copied!" : "Copy URL"}
             </button>
           </div>
 
-          <a href={"/admin"} target="_blank" rel="noopener noreferrer" className="mt-5 bg-gray-800 text-white py-3 w-full rounded-lg shadow-md transition-all duration-300 hover:bg-gray-900 hover:scale-105 hover:shadow-xl">
+          <a href={"/admin"} target="_blank" rel="noopener noreferrer" className="mt-5 bg-gray-800 text-white max-sm:py-1 max-sm:w-80 py-3 w-full rounded-lg shadow-md transition-all duration-300 hover:bg-gray-900 hover:scale-105 hover:shadow-xl">
             Manage Site
           </a>
         </div>
@@ -245,7 +245,7 @@ export default function Home() {
         <div className="relative flex items-center justify-center max-w-7xl mx-auto gap-4">
           {/* Left Navigation Button */}
           <button
-            className="absolute left-4 z-10 bg-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 transition-all sm:p-4"
+            className="absolute -left-4 z-10 bg-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 transition-all sm:p-4"
             onClick={() => swiperRef.current?.slidePrev()}
           >
             <ChevronLeft size={20} />
@@ -283,7 +283,7 @@ export default function Home() {
                     />
 
                     {/* Title */}
-                    <div className="p-4 sm:p-6 text-center">
+                    <div className="text-center">
                       <h3 className="text-lg sm:text-xl font-semibold text-gray-800">{template.title}</h3>
                     </div>
 
@@ -304,7 +304,7 @@ export default function Home() {
 
           {/* Right Navigation Button */}
           <button
-            className="absolute right-4 z-10 bg-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 transition-all sm:p-4"
+            className="absolute -right-1 sm:-right-3 z-10 bg-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 transition-all sm:p-4"
             onClick={() => swiperRef.current?.slideNext()}
           >
             <ChevronRight size={20} />

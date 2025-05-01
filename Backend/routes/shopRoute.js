@@ -16,7 +16,6 @@ shopRouter.put('/manageshop',updateShopDetails)
 shopRouter.get('/:slug', (req, res) => {
     const { slug } = req.params; // Extract slug from request parameters
     const fullShopUrl = `${frontendURl}/shop/${slug}`; // Construct full URL
-
     renderShops(req, res, fullShopUrl); // Pass full URL to renderShops
 });
 

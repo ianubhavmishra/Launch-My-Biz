@@ -36,18 +36,19 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-dashboard">
-      <div className="text-center py-6 bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-lg">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-wide">
-          🚀 Launch My Biz – Admin Dashboard
-        </h1>
-        <p className="mt-2 text-sm md:text-base">
-          Ready to manage your store like a pro
-        </p>
-      </div>
+      <div className="text-center px-2 py-2 md:py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-lg">
+  <h1 className="text-x sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-wide leading-snug">
+    🚀 Launch My Biz – Admin Dashboard
+  </h1>
+  <p className="text-xs sm:text-sm md:text-base lg:text-lg">
+    Ready to manage your store like a pro
+  </p>
+</div>
+
 
       {/* Render the selected template */}
-      {adminData.template === "temp2" && <FoodStoreLanding />}
-      {/* {adminData.template === "temp2" && <AdminElectronicStoreTemplate />} */}
+      {adminData.template === "temp1" && <FoodStoreLanding />}
+      {adminData.template === "temp2" && <AdminElectronicStoreTemplate />}
     </div>
   );
 };

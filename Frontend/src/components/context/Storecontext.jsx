@@ -7,7 +7,7 @@ export const Store_context = createContext(null)
 
 const StoreContextProvider = (props) => {
 
-    const backendUrl = "http://localhost:4000";
+    const backendUrl = "https://launch-my-biz.onrender.com";
     const [adminData, setadminData] = useState({})
     const {user} = useUser();
     

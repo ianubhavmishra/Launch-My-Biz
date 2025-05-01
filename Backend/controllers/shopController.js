@@ -39,7 +39,6 @@ async function addShop(req, res) {
 
 const renderShops = async (req, res, shopUrl) => {
     try {
-        // console.log("Shop URL received:", shopUrl); 
 
         // Fetch the shop based on the shop URL
         const shop = await shopModel.findOne({ url: shopUrl });
