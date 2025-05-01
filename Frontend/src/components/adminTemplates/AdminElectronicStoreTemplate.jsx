@@ -77,40 +77,40 @@ export default function AdminElectronicStoreTemplate() {
   }
 
   // Create a debounced version of updateShopDetails with toast
-const debouncedUpdate = useCallback(
-  debounce(async (field, value) => {
-    const success = await updateShopDetails(field, value);
+  const debouncedUpdate = useCallback(
+    debounce(async (field, value) => {
+      const success = await updateShopDetails(field, value);
 
-    const fieldMap = {
-      products: "Products",
-      footer: "Footer Info",
-      siteName: "Store Name",
-      welcomeText: "Welcome text",
-      tagline: "Tagline"
-    };
+      const fieldMap = {
+        products: "Products",
+        footer: "Footer Info",
+        siteName: "Store Name",
+        welcomeText: "Welcome text",
+        tagline: "Tagline"
+      };
 
-    if (success) {
-      toast.success(`${fieldMap[field] || field} updated successfully!`, {
-        duration: 3000,
-        style: {
-          borderRadius: "10px",
-          background: "#e6fffa",
-          color: "#2c7a7b",
-        },
-      });
-    } else {
-      toast.error(`Failed to update ${fieldMap[field] || field}`, {
-        duration: 3000,
-        style: {
-          borderRadius: "10px",
-          background: "#ffe6e6",
-          color: "#b91c1c",
-        },
-      });
-    }
-  }, 1500),
-  []
-);
+      if (success) {
+        toast.success(`${fieldMap[field] || field} updated successfully!`, {
+          duration: 3000,
+          style: {
+            borderRadius: "10px",
+            background: "#e6fffa",
+            color: "#2c7a7b",
+          },
+        });
+      } else {
+        toast.error(`Failed to update ${fieldMap[field] || field}`, {
+          duration: 3000,
+          style: {
+            borderRadius: "10px",
+            background: "#ffe6e6",
+            color: "#b91c1c",
+          },
+        });
+      }
+    }, 1500),
+    []
+  );
 
   //image upload function for cloudinary
   const uploadToBackend = async (file) => {
@@ -215,8 +215,9 @@ const debouncedUpdate = useCallback(
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
-        <div className="flex items-center space-x-2 ml-4 sm:ml-6">
+      <header className="bg-gray-800 text-white px-4 py-3 flex justify-between items-center relative z-50">
+        {/* Logo and Site Name */}
+        <div className="flex items-center space-x-2">
           <input
             type="file"
             accept="image/*"
@@ -225,7 +226,11 @@ const debouncedUpdate = useCallback(
             id="logo-upload"
           />
           <label htmlFor="logo-upload" className="cursor-pointer">
-            <img src={logo} alt="Logo" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover" />
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-8 h-8 sm:w-12 sm:h-12 rounded-full object-cover"
+            />
           </label>
           <input
             type="text"
@@ -234,7 +239,7 @@ const debouncedUpdate = useCallback(
               setSiteName(e.target.value);
               debouncedUpdate("siteName", e.target.value);
             }}
-            className="text-xl sm:text-2xl font-extrabold tracking-wide text-blue-400 bg-transparent border-none focus:outline-none"
+            className="text-lg sm:text-xl font-bold tracking-wide bg-transparent border-none focus:outline-none"
           />
           <input
             type="file"
@@ -243,70 +248,81 @@ const debouncedUpdate = useCallback(
             className="hidden"
             id="bg-upload"
           />
-
         </div>
 
-        <button className="sm:hidden" onClick={() => setMenuOpen(!menuOpen)}>
+        {/* Mobile Toggle Button */}
+        <button className="sm:hidden z-50" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         {/* Navigation Menu */}
         <nav
-          className={`absolute sm:static top-16 left-0 w-full sm:w-auto bg-gray-800 sm:bg-transparent text-center flex-col sm:flex sm:flex-row items-center sm:space-x-6 transition-all duration-300 z-50 ${menuOpen ? "flex" : "hidden sm:flex"
+          className={`absolute sm:static top-full left-0 w-full sm:w-auto bg-gray-700 sm:bg-transparent flex-col sm:flex sm:flex-row items-start pl-3 sm:space-x-6 text-sm transition-all duration-300 ${menuOpen ? "flex" : "hidden sm:flex"
             }`}
         >
-          <a href="#" className="block sm:inline-block py-2 sm:py-0 hover:text-gray-300 font-medium sm:font-semibold">
+          <a href="#"
+            className="block sm:inline-block py-1 sm:py-0 hover:text-gray-300 sm:font-semibold">
             Home
           </a>
-          <a href="#featured" className="block sm:inline-block py-2 sm:py-0 hover:text-gray-300 font-medium sm:font-semibold">
+          <a href="#featured"
+            className="block sm:inline-block py-1 sm:py-0 hover:text-gray-300 sm:font-semibold">
             Products
           </a>
-          <a href="#footer" className="block sm:inline-block py-2 sm:py-0 hover:text-gray-300 font-medium sm:font-semibold">
+          <a href="#footer"
+            className="block sm:inline-block py-1 sm:py-0 hover:text-gray-300 sm:font-semibold">
             About
           </a>
         </nav>
-
-
-
       </header>
+
+
       <main className="flex-grow">
-        <section
-          className="bg-gray-100 text-center py-8 sm:py-12 relative flex flex-col items-center justify-center cursor-pointer"
-          style={{
-            backgroundImage: `url(${bgImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            minHeight: '300px'
-          }}
-          onClick={(e) => {
-            // Prevent opening file upload when clicking inside an input
-            if (e.target.tagName !== "INPUT") {
-              document.getElementById("bg-upload").click();
-            }
-          }}
-        >
-          {/* Hidden File Input for Background Upload */}
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleBackgroundUpload}
-            className="hidden"
-            id="bg-upload"
-          />
-          {/* Editable Text Inputs */}
-          <input
-            type="text"
-            value={welcomeText}
-            onChange={(e) => { setWelcomeText(e.target.value); debouncedUpdate("welcomeText", e.target.value) }}
-            className="text-3xl sm:text-5xl font-extrabold text-black mb-4 bg-transparent border-none focus:outline-none text-center w-full"
-          />
-          <input
-            type="text"
-            value={tagline}
-            onChange={(e) => { setTagline(e.target.value); debouncedUpdate("tagline", e.target.value); }}
-            className="text-lg sm:text-xl text-black bg-transparent border-none focus:outline-none text-center w-full"
-          />
-        </section>
+      <section
+  className="relative flex flex-col items-center justify-center px-4 sm:px-6 py-10 sm:py-14 text-center bg-gray-100 cursor-pointer"
+  style={{
+    backgroundImage: `url(${bgImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    minHeight: '220px', // kam height
+  }}
+  onClick={(e) => {
+    if (e.target.tagName !== "INPUT") {
+      document.getElementById("bg-upload").click();
+    }
+  }}
+>
+  {/* Hidden file input for background image */}
+  <input
+    type="file"
+    accept="image/*"
+    onChange={handleBackgroundUpload}
+    className="hidden"
+    id="bg-upload"
+  />
+
+  {/* Welcome text */}
+  <input
+    type="text"
+    value={welcomeText}
+    onChange={(e) => {
+      setWelcomeText(e.target.value);
+      debouncedUpdate("welcomeText", e.target.value);
+    }}
+    className="text-xl sm:text-4xl font-extrabold text-black mb-2 bg-transparent border-none text-center focus:outline-none w-full max-w-3xl"
+  />
+
+  {/* Tagline */}
+  <input
+    type="text"
+    value={tagline}
+    onChange={(e) => {
+      setTagline(e.target.value);
+      debouncedUpdate("tagline", e.target.value);
+    }}
+    className="text-base sm:text-lg md:text-xl text-black bg-transparent border-none text-center focus:outline-none w-full max-w-2xl"
+  />
+</section>
+
         <section id="featured" className="container mx-auto px-4 py-8 sm:py-12">
           <h2 className="text-xl sm:text-4xl font-extrabold mb-6 text-center font-serif tracking-wide text-black sm:text-gray-900 drop-shadow-md sm:drop-shadow-lg">
             Featured Products

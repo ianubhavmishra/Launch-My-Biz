@@ -3,24 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { ArrowRight, ArrowLeft } from "lucide-react"
 
 const FoodStoreLanding = () => {
-  // Mock logo – replace with your dynamic logic from backend or props
-  const logoUrl = "https://images.unsplash.com/photo-1550547660-d9450f859349"; // set to actual logo URL when available
+  const logoUrl = "https://images.unsplash.com/photo-1550547660-d9450f859349";
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   return (
-      <div className="bg-orange-50 font-sans scroll-smooth">
+    <div className="bg-orange-50 font-sans scroll-smooth">
       {/* Header */}
       <header className="bg-orange-200 py-4 shadow-lg sticky top-0 z-50">
         <div className="container mx-auto flex justify-between items-center px-6">
           <div className="flex items-center space-x-2">
             {logoUrl ? (
               <>
-                <img src={logoUrl} alt="logo" className="w-10 h-10 rounded-full" />
-                <h1 className="text-2xl font-bold text-orange-800">TastyBites</h1>
+                <img src={logoUrl} alt="logo" className="sm:w-10 sm:h-10 w-8 h-8 rounded-full" />
+                <h1 className="text-lg sm:text-2xl font-bold text-orange-800">TastyBites</h1>
               </>
             ) : (
-              <h1 className="text-2xl font-bold text-orange-800">TastyBites</h1>
+              <h1 className="text-lg sm:text-2xl font-bold text-orange-800">TastyBites</h1>
             )}
           </div>
 
@@ -56,28 +55,27 @@ const FoodStoreLanding = () => {
         )}
       </header>
 
-
       {/* Hero Section */}
-      <section id="home" className="flex flex-col md:flex-row items-center justify-between px-6 py-10 bg-orange-100">
+      <section id="home" className="flex flex-col-reverse md:flex-row items-center justify-between p-4 sm:px-6 sm:py-10 bg-orange-100">
         <div className="md:w-1/2 text-center md:text-left">
-          <h2 className="text-4xl font-extrabold text-orange-800">Delicious Meals, Delivered Fast</h2>
-          <p className="mt-4 text-orange-700">
+          <h2 className="text-xl sm:text-4xl pt-3 font-extrabold text-orange-800">Delicious Meals, Delivered Fast</h2>
+          <p className="sm:mt-3 sm:mb-6 mb-3 sm:text-lg text-sm text-orange-700">
             Explore our hand-crafted menu full of flavor and love. Order online or dine in today!
           </p>
-          <button className="mt-6 px-6 py-2 bg-orange-600 text-white rounded-full hover:bg-orange-700">
+          <a href="#contact" className="px-3 py-1 sm:px-6 sm:py-2 bg-orange-600 text-white rounded-full hover:bg-orange-700">
             Visit Now
-          </button>
+          </a>
         </div>
         <img
           src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
           alt="Food Dish"
-          className="md:w-1/2 mt-6 md:mt-0 rounded-lg shadow-xl"
+          className="md:w-1/2 mt-3 md:mt-0 rounded-lg shadow-xl"
         />
       </section>
 
       {/* Menu Section */}
-      <section id="menu" className="py-12 bg-orange-100">
-        <h3 className="text-3xl text-center font-bold text-orange-800 mb-8">Menu</h3>
+      <section id="menu" className="sm:py-12 bg-orange-100">
+        <h3 className="sm:text-3xl text-2xl text-center font-bold text-orange-800 mb-5 sm:mb-8">Our Menu</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-6">
           {[
             { name: "Cheesy Pizza", price: "₹9.99", img: "https://images.pexels.com/photos/31771050/pexels-photo-31771050/free-photo-of-delicious-freshly-baked-pizza-with-toppings.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
@@ -90,38 +88,38 @@ const FoodStoreLanding = () => {
             <div key={i} className="bg-white rounded-xl shadow-md p-4 text-center">
               <img src={item.img} alt={item.name} className="w-full h-48 object-cover rounded-lg" />
               <h4 className="mt-4 text-xl font-semibold text-orange-800">{item.name}</h4>
-              <p className="text-orange-600">{item.price}</p>
+              <p className="text-orange-600">₹{item.price}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-12 px-6 bg-orange-100">
+      <section id="contact" className="sm:py-12 py-8 px-6 bg-orange-100">
         <h3 className="text-3xl text-center font-bold text-orange-800 mb-8">Get In Touch</h3>
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 text-orange-700">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h4 className="font-semibold mb-2">Address</h4>
-            <p>123 Food Street, Flavor Town</p>
+          <div className="bg-white sm:p-6 p-3 rounded-lg shadow-md">
+            <h4 className="font-semibold sm:mb-2">Address</h4>
+            <p>Model Town, Panipat</p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h4 className="font-semibold mb-2">Phone</h4>
-            <p>+91 9876543210</p>
+          <div className="bg-white sm:p-6 p-3 rounded-lg shadow-md">
+            <h4 className="font-semibold sm:mb-2">Phone</h4>
+            <p>6969696969</p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h4 className="font-semibold mb-2">Email</h4>
+          <div className="bg-white sm:p-6 p-3 rounded-lg shadow-md">
+            <h4 className="font-semibold sm:mb-2">Email</h4>
             <p>support@tastybites.com</p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h4 className="font-semibold mb-2">Hours</h4>
+          <div className="bg-white sm:p-6 p-3 rounded-lg shadow-md">
+            <h4 className="font-semibold sm:mb-2">Hours</h4>
             <p>Mon-Sun: 9am - 11pm</p>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-orange-900 text-white text-center py-6 mt-10">
-        <p>&copy; 2025 TastyBites. All rights reserved.</p>
+      <footer className="bg-orange-900 text-white text-center py-6">
+        <p>&copy; 2025 TastyBites All rights reserved.</p>
       </footer>
 
       <div>
@@ -163,7 +161,6 @@ const FoodStoreLanding = () => {
           </button>
         </div>
       </div>
-
     </div>
   );
 };

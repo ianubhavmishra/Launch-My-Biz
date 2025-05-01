@@ -24,13 +24,13 @@ export default function LandingPage() {
       <header className="bg-gray-800 text-white">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center">
-            <img src="public/LaunchMyBiz-logo.png" alt="Logo" className="mr-2 w-10 h-10" />
+            <img src="public/LaunchMyBiz-logo.png" alt="Logo" className="mr-2 w-10 h-10 rounded-full" />
             <span className="text-lg sm:text-xl font-bold">ElectroStore</span>
           </div>
           <nav className="hidden md:flex space-x-4 text-sm sm:text-base">
             <a href="#" className="hover:text-gray-300">Home</a>
-            <a href="#" className="hover:text-gray-300">Products</a>
-            <a href="#" className="hover:text-gray-300">About</a>
+            <a href="#featured" className="hover:text-gray-300">Products</a>
+            <a href="#footer" className="hover:text-gray-300">About</a>
           </nav>
           <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
             {isMenuOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
@@ -39,8 +39,8 @@ export default function LandingPage() {
         {isMenuOpen && (
           <nav className="md:hidden bg-gray-700 px-4 py-2 text-sm">
             <a href="#" className="block py-2">Home</a>
-            <a href="#" className="block py-2">Products</a>
-            <a href="#" className="block py-2">About</a>
+            <a href="#featured" className="block py-2">Products</a>
+            <a href="#footer" className="block py-2">About</a>
           </nav>
         )}
       </header>
@@ -65,7 +65,7 @@ export default function LandingPage() {
         </section>
 
         {/* Featured Products */}
-        <section className="container mx-auto px-4 py-8 sm:py-12">
+        <section id="featured" className="container mx-auto px-4 py-8 sm:py-12">
           <h2 className="text-xl sm:text-3xl font-bold mb-6">Featured Products</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {products.map((product) => (
@@ -74,9 +74,11 @@ export default function LandingPage() {
                 <div className="p-4">
                   <h3 className="text-lg sm:text-xl font-semibold mb-2">{product.name}</h3>
                   <p className="text-sm sm:text-base text-gray-600 mb-4">₹{product.price}</p>
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300 w-full">
-                    Visit Us Now!
-                  </button>
+                  <a href="#footer">
+                    <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300 w-full">
+                      Visit Us Now!
+                    </button>
+                  </a>
                 </div>
               </div>
             ))}
@@ -86,7 +88,7 @@ export default function LandingPage() {
 
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white text-center text-sm sm:text-base">
+      <footer id="footer" className="bg-gray-800 text-white text-center text-sm sm:text-base">
         <div className="container mx-auto px-4 py-8 flex flex-col items-center">
           <div className="text-center mb-4">
             <p>Availability: Mon-Sat | 9:00 Am-10:00 Pm</p>

@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback, useContext } from "react";
 import {Store_context} from "../context/Storecontext";
-import { Trash2, Plus } from "lucide-react";
+import { Trash2, Plus, Menu, X } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 const FoodStoreLanding = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [products, setProducts] = useState([]);
   const [siteName, setSiteName] = useState("");
   const [newProduct, setNewProduct] = useState({ name: "", price: "", image: "null" });
@@ -216,23 +217,27 @@ const debouncedUpdate = useCallback(
     <div className="bg-orange-50 font-sans scroll-smooth">
       {/* Header */}
       <header className="bg-orange-200 py-4 shadow-lg sticky top-0 z-50">
-        <div className="container mx-auto flex justify-between items-center px-6">
+        <div className="container mx-auto flex justify-between items-center px-4 sm:px-6">
+          {/* Logo + Site Name */}
           <div className="flex items-center space-x-2 cursor-pointer">
-
             <input type="file" accept="image/*" onChange={handleLogoUpload} className="hidden" id="logo-upload" />
             <label htmlFor="logo-upload" className="cursor-pointer">
-              <img src={logo} alt="Logo" className="w-10 h-10 sm:w-12 sm:h-12" />
+              <img src={logo} alt="Logo" className="w-8 h-8 sm:w-12 sm:h-12 rounded-full object-cover" />
             </label>
             <input
               type="text"
               value={siteName}
-              onChange={(e) => {
-                setSiteName(e.target.value);
-                debouncedUpdate("siteName", e.target.value);}}
-              className="text-2xl font-bold text-orange-800 bg-transparent border-none focus:outline-none"
+              onChange={(e) => setSiteName(e.target.value)}
+              className="text-lg sm:text-2xl font-bold text-orange-800 bg-transparent border-none focus:outline-none"
             />
           </div>
 
+          {/* Mobile Menu Button */}
+          <button className="md:hidden text-orange-900" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex">
             <ul className="flex space-x-6 text-orange-900 font-medium">
               <li><a href="#home">Home</a></li>
@@ -241,27 +246,40 @@ const debouncedUpdate = useCallback(
             </ul>
           </nav>
         </div>
+
+        {/* Mobile Navigation */}
+        {menuOpen && (
+          <nav className="md:hidden px-6 mt-2">
+            <ul className="flex flex-col text-sm gap-2 text-orange-900">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#menu">Menu</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        )}
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="flex flex-col-reverse md:flex-row items-center justify-between px-6 py-10 bg-orange-100 gap-8">
+      <section id="home" className="flex flex-col-reverse md:flex-row items-center justify-between sm:px-6 sm:py-10 px-3 py-5 bg-orange-100 gap-8">
         <div className="w-full md:w-1/2 text-center md:text-left">
           <>
             <input
               type="text"
               value={welcomeText}
               onChange={(e) => { setWelcomeText(e.target.value); debouncedUpdate("welcomeText", e.target.value) }}
-              className="text-3xl md:text-4xl font-extrabold text-orange-800 bg-transparent border-none w-full mb-4 text-center md:text-left"
+              className="text-xl sm:text-4xl font-extrabold text-orange-800 bg-transparent border-none w-full sm:mb-4 text-center md:text-left"
             />
             <input
               value={tagline}
               onChange={(e) => { setTagline(e.target.value); debouncedUpdate("tagline", e.target.value); }}
-              className="text-orange-700 w-full bg-transparent border-none resize-none text-center md:text-left"
+              className="text-orange-700 sm:text-lg text-sm w-full bg-transparent border-none resize-none text-center md:text-left"
             />
           </>
-          <button className="mt-6 px-6 py-2 bg-orange-600 text-white rounded-full hover:bg-orange-700">
+          <a href="#contact">
+            <button className="sm:mt-6 mt-3 px-3 sm:px-6 py-1 sm:py-2 bg-orange-600 text-white rounded-full hover:bg-orange-700">
             Visit Now
           </button>
+            </a>
         </div>
 
         <div className="w-full md:w-1/2 flex justify-center relative">
@@ -282,13 +300,13 @@ const debouncedUpdate = useCallback(
       </section>
 
       {/* Menu Section */}
-      <section id="menu" className="py-12 bg-orange-100">
-      <h3 className="text-3xl text-center font-bold text-orange-800 mb-8">Menu</h3>
+      <section id="menu" className="sm:py-12 bg-orange-100">
+      <h3 className="sm:text-3xl text-2xl text-center font-bold text-orange-800 sm:mb-8 mb-5">Our Menu</h3>
 
       <div className="flex justify-center mb-6">
         <button
           onClick={() => setShowAddMenu(!showAddMenu)}
-          className="bg-orange-600 text-white px-4 py-2 rounded-md flex items-center hover:bg-orange-700"
+          className="bg-orange-600 text-white px-2 py-1 sm:px-4 sm:py-3 rounded-md flex items-center hover:bg-orange-700"
         >
           <Plus size={20} className="mr-2" /> Add Menu Item
         </button>
@@ -395,12 +413,12 @@ const debouncedUpdate = useCallback(
     </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-12 px-6 bg-orange-100">
+      <section id="contact" className="sm:py-12 p-8 px-6 bg-orange-100">
         <h3 className="text-3xl text-center font-bold text-orange-800 mb-8">Get In Touch</h3>
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 text-orange-700">
           {Object.entries(footerData).map(([key, value]) => (
-            <div key={key} className="bg-white p-6 rounded-lg shadow-md">
-              <h4 className="font-semibold mb-2 capitalize">{key}</h4>
+            <div key={key} className="bg-white sm:p-6 p-3 rounded-lg shadow-md">
+              <h4 className="font-semibold sm:mb-2 capitalize">{key}</h4>
               <input
                 value={value}
                 onChange={(e) => handleFooterChange(key, e.target.value)}
@@ -411,7 +429,7 @@ const debouncedUpdate = useCallback(
         </div>
       </section>
 
-      <footer className="bg-orange-900 text-white text-center py-6 mt-10">
+      <footer className="bg-orange-900 text-white text-center py-6">
         <p>&copy; 2025 {siteName}. All rights reserved.</p>
       </footer>
     </div>

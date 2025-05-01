@@ -36,7 +36,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-dashboard">
-      <div className="text-center px-2 py-2 md:py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-lg">
+      <div className="text-center p-1 md:py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-lg">
   <h1 className="text-x sm:text-xl md:text-2xl lg:text-3xl font-bold tracking-wide leading-snug">
     🚀 Launch My Biz – Admin Dashboard
   </h1>

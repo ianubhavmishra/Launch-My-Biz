@@ -63,7 +63,7 @@ export default function Home() {
   const {adminData} = useContext(Store_context);
   const [copied, setCopied] = useState(false);
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(setShopUrl);
+    navigator.clipboard.writeText(shopUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -84,9 +84,7 @@ export default function Home() {
     }
   }, [adminData]);
   
-
   return (
-
     <div className="bg-gray-100 min-h-screen">
       <nav className="bg-white shadow-md py-4 px-2 sm:px-6 flex justify-between items-center fixed w-full top-0 z-100">
         <h1 className="text-lg sm:text-2xl font-bold text-blue-600 flex items-center">
@@ -123,7 +121,7 @@ export default function Home() {
         </div>
       </div>
 
-      {shopUrl ? <div className="flex flex-col md:flex-row items-center justify-center bg-gray-100 mt-9 rounded-xl shadow-xl border-2 border-gray-300 max-sm:w-96 max-w-screen-xl mx-auto">
+      {shopUrl ? <div className="flex flex-col md:flex-row items-center justify-center bg-gray-100 mt-9 rounded-xl shadow-xl border-2 border-gray-300 max-sm:w-[22rem] max-w-screen-xl mx-auto">
         {/* Left Side */}
         <div className="w-full md:w-1/2 p-5 border-b md:border-b-9 md:border-r border-gray-300 flex flex-col items-center justify-center">
           <iframe
@@ -133,14 +131,14 @@ export default function Home() {
             style={{ overflow: 'hidden' }}
           // scrolling="no"
           ></iframe>
-          <a href={shopUrl} target="_blank" rel="noopener noreferrer" className="mt-5 bg-blue-600 text-white max-sm:w-80 w-full text-center py-3 max-sm:py-1 rounded-lg shadow-md transition-all duration-300 hover:bg-blue-800 hover:scale-105 hover:shadow-xl">
+          <a href={shopUrl} target="_blank" rel="noopener noreferrer" className="mt-5 bg-blue-600 text-white max-sm:w-76 w-full text-center py-3 max-sm:py-1 rounded-lg shadow-md transition-all duration-300 hover:bg-blue-800 hover:scale-105 hover:shadow-xl">
             Visit Site
           </a>
         </div>
 
         {/* Right Side */}
         <div className="w-full xl:h-[30vw] md:w-1/2 p-5 flex flex-col items-center text-center justify-around">
-          <div className="xl:text-xl font-bold bg-green-500 text-white max-sm:py-1.5 py-3 px-2 w-full max-sm:w-80 rounded-lg shadow-lg mb-5">
+          <div className="xl:text-xl bg-green-500 text-white max-sm:py-1.5 py-3 px-2 w-full max-sm:w-76 rounded-lg shadow-lg mb-5">
             🥳 Congratulations Your site is Live ✈
           </div>
 
@@ -159,7 +157,7 @@ export default function Home() {
             </button>
           </div>
 
-          <a href={"/admin"} target="_blank" rel="noopener noreferrer" className="mt-5 bg-gray-800 text-white max-sm:py-1 max-sm:w-80 py-3 w-full rounded-lg shadow-md transition-all duration-300 hover:bg-gray-900 hover:scale-105 hover:shadow-xl">
+          <a href={"/admin"} target="_blank" rel="noopener noreferrer" className="mt-5 bg-gray-800 text-white max-sm:py-1 max-sm:w-76 py-3 w-full rounded-lg shadow-md transition-all duration-300 hover:bg-gray-900 hover:scale-105 hover:shadow-xl">
             Manage Site
           </a>
         </div>
@@ -304,7 +302,7 @@ export default function Home() {
 
           {/* Right Navigation Button */}
           <button
-            className="absolute -right-1 sm:-right-3 z-10 bg-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 transition-all sm:p-4"
+            className="absolute -right-2 z-10 bg-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 transition-all sm:p-4"
             onClick={() => swiperRef.current?.slideNext()}
           >
             <ChevronRight size={20} />
