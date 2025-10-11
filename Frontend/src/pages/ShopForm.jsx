@@ -75,7 +75,7 @@ const StoreForm = () => {
   };
 
   return isSignedIn ? (
-    <div className="max-w-2xl mx-auto p-6 bg-blue-50 rounded-md shadow-md mt-10">
+    <div className="max-w-2xl mx-auto p-6 bg-blue-50 rounded-md shadow-md mt-10 bg-[url('LaunchMyBiz-logo.png')] bg-no-repeat bg-center bg-contain bg-blend-lighten">
       <div className="flex justify-between">
         <h2 className="text-2xl font-bold mb-6">Store Details Form</h2>
         <X className="w-8 h-8 cursor-pointer" onClick={() => navigate("/")} />

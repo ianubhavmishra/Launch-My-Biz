@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext} from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "slick-carousel/slick/slick.css";
@@ -6,38 +6,37 @@ import "slick-carousel/slick/slick-theme.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import {ArrowRight, ChevronLeft, ChevronRight, Facebook, Twitter, Instagram} from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Facebook, Twitter, Instagram } from "lucide-react";
 import { useClerk, UserButton, useUser } from '@clerk/clerk-react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { Store_context } from "../components/context/Storecontext";
 
-
-const templates =[{
+const templates = [{
   id: 1,
   url: "/temp1",
   image: "https://res.cloudinary.com/dfq5ttsjy/image/upload/v1745918262/g2b9zfk2wz6r1hk847tn.png",
   title: "Food Store Template",
   description: "A vibrant and modern food store template designed to showcase your delicious offerings. With sections for menus and contact details, it’s perfect for restaurants, cafes, and cloud kitchens. Fully responsive and easily customizable — get your food business online in minutes!"
-},{
+}, {
   id: 2,
   url: "/temp2",
   image: "https://res.cloudinary.com/dfq5ttsjy/image/upload/v1745923380/hp6h9gktr5z6ckrfzzus.png",
   title: "Electronic Store Template",
   description: "A sleek and dynamic electronic store template built to highlight your latest gadgets and tech products. Featuring product showcases, specifications, and contact details — this template is perfect for electronics shops, gadget retailers, and tech brands. Fully responsive, fast, and simple to customize for your growing business!"
-},{
+}, {
   id: 3,
   url: "/temp3",
   image: "https://res.cloudinary.com/dfq5ttsjy/image/upload/v1745920516/rxwxas1u9a6eldyanx4b.png",
   title: "Jwellery Store Template",
   description: "An elegant and luxurious template crafted to showcase fine jewellery collections. Highlight your best pieces with stunning visuals, detailed product info, and trust-building testimonials. Perfect for jewellers and boutiques looking to make a lasting impression online"
-},{
+}, {
   id: 4,
   url: "/temp4",
   image: "https://res.cloudinary.com/dfq5ttsjy/image/upload/v1745920446/kgorejxrlykngsllhzts.png",
   title: "Healthcare Template",
   description: "A clean and professional template tailored for pharmacies, clinics, and healthcare suppliers. List products, services, and essential info with clarity. Designed for trust, accessibility, and easy navigation — ideal for bringing medical services online."
-},{
+}, {
   id: 5,
   url: "/temp5",
   image: "https://res.cloudinary.com/dfq5ttsjy/image/upload/v1745920447/gwgw4gljpim8vcow7adq.png",
@@ -60,7 +59,7 @@ export default function Home() {
   const navigate = useNavigate();
   const swiperRef = useRef(null);
   const [shopUrl, setShopUrl] = useState(null);
-  const {adminData} = useContext(Store_context);
+  const { adminData } = useContext(Store_context);
   const [copied, setCopied] = useState(false);
   const copyToClipboard = () => {
     navigator.clipboard.writeText(shopUrl);
@@ -77,22 +76,29 @@ export default function Home() {
       setShopUrl(null);
     }
   }, [isSignedIn]);
-  
+
   useEffect(() => {
     if (adminData?.url) {
       setShopUrl(adminData.url);
     }
   }, [adminData]);
-  
+
   return (
     <div className="bg-gray-100 min-h-screen">
-      <nav className="bg-white shadow-md py-4 px-2 sm:px-6 flex justify-between items-center fixed w-full top-0 z-100">
-        <h1 className="text-lg sm:text-2xl font-bold text-blue-600 flex items-center">
-          <img src="/LaunchMyBiz-logo.png" className="w-10 pr-1" /> Launch My Biz
-        </h1>
+      <header className="flex justify-between items-center sm:px-8 sm:py-4 py-2 px-4 shadow-sm bg-white sticky top-0 z-50">
+        <a href="#hero" className="sm:text-2xl text-sm font-bold text-blue-600 cursor-pointer flex items-center">
+          <img src="LaunchMyBiz-logo.png" alt="logo" className="sm:w-12 w-8" />
+          <p>Launch My Biz</p>
+        </a>
+        <nav className="hidden md:flex gap-6 text-gray-600 font-medium">
+          <a href="#how-it-works" className="hover:text-blue-600">How It Works</a>
+          <a href="#features" className="hover:text-blue-600">Features</a>
+          <a href="#templates" className="hover:text-blue-600">Templates</a>
+          <a href="#contact" className="hover:text-blue-600">Contact</a>
+        </nav>
         <div className="flex gap-4">
           {isSignedIn ? (
-            <div className='flex max-sm:w-10 items-center gap-2 sm:gap-3'>
+            <div className='flex items-center gap-2 sm:gap-3'>
               <p className='text-gray-600 max-sm:hidden'>Hi, {user.fullName}</p>
               <UserButton />
             </div>
@@ -102,26 +108,46 @@ export default function Home() {
             </button>
           )}
         </div>
-      </nav>
+      </header>
 
-      {/* main */}
-      <div className="relative w-full flex flex-col items-center text-center sm:py-28 py-18 px-6 overflow-hidden mt-17">
-        <img
-          src="bg.jpg"
-          alt="Launch My Biz"
-          className="absolute inset-0 sm:w-full sm:h-full object-cover opacity-70 z-0"
-        />
-
-        <div className='absolute sm:w-full text-center font-semibold  flex justify-center top-1/2 transform -translate-y-1/2'>
-          <p className="text-[17px] sm:text-[20px] md:text-[24px] lg:text-[28px]">
-            <i>Launch your business online on <span className="bg-yellow-300 px-2">Launch My Biz</span></i>
-            <p></p>
-            <i>Simple, efficient, and <span className="underline text-blue-600">Free!</span></i>
+      {/* Hero Section */}
+      <section id="hero" className="flex flex-col-reverse md:flex-row items-center justify-between px-5 md:px-20 md:py-16 py-8 gap-10 bg-gradient-to-br from-gray-200 via-gray-400 to-gray-100">
+        <div className="flex-1">
+          <motion.h2
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight"
+          >
+            Launch your business online in minutes
+          </motion.h2>
+          <p className="mt-6 text-lg text-gray-600 max-w-lg">
+            Build, customize, and deploy your website effortlessly. Simple, efficient, and free.
           </p>
+          <div className="mt-2 flex gap-4">
+            <button
+              onClick={openSignIn}
+              className="bg-zinc-800 text-white flex items-center gap-2 px-4 py-2 sm:px-8 sm:py-3 text-sm rounded-full hover:bg-zinc-700 transition">
+              Get Started <ArrowRight className="w-5 h-5 text-white" />
+            </button>
+          </div>
         </div>
-      </div>
 
-      {shopUrl ? <div className="flex flex-col md:flex-row items-center justify-center bg-gray-100 mt-9 rounded-xl shadow-xl border-2 border-gray-300 max-sm:w-[22rem] max-w-screen-xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="flex-1"
+        >
+          <img
+            src="bg.jpg"
+            alt="Dashboard Preview"
+            className="rounded-2xl shadow-lg"
+          />
+        </motion.div>
+      </section>
+
+      {shopUrl ? <div className="flex flex-col md:flex-row items-center justify-center bg-gray-100 m-9 rounded-xl shadow-xl border-2 border-gray-300 max-sm:w-[22rem] max-w-screen-xl mx-auto bg-gradient-to-br from-blue-100 via-purple-100 to-red-100">
         {/* Left Side */}
         <div className="w-full md:w-1/2 p-5 border-b md:border-b-9 md:border-r border-gray-300 flex flex-col items-center justify-center">
           <iframe
@@ -131,7 +157,7 @@ export default function Home() {
             style={{ overflow: 'hidden' }}
           // scrolling="no"
           ></iframe>
-          <a href={shopUrl} target="_blank" rel="noopener noreferrer" className="mt-5 bg-blue-600 text-white max-sm:w-76 w-full text-center py-3 max-sm:py-1 rounded-lg shadow-md transition-all duration-300 hover:bg-blue-800 hover:scale-105 hover:shadow-xl">
+          <a href={shopUrl} target="_blank" rel="noopener noreferrer" className="mt-5 bg-blue-600 text-white max-sm:w-76 w-full text-center py-3 max-sm:py-1 rounded-lg shadow-md transition-all duration-300 hover:bg-blue-800 hover:shadow-xl">
             Visit Site
           </a>
         </div>
@@ -151,22 +177,22 @@ export default function Home() {
             />
             <button
               onClick={copyToClipboard}
-              className="mt-3 w-full bg-gray-600 text-white px-5 py-2 max-sm:p-1 rounded-lg shadow-md transition-all duration-300 hover:bg-gray-800 hover:scale-105 hover:shadow-lg"
+              className="mt-3 w-full bg-gray-600 text-white px-5 py-2 max-sm:p-1 rounded-lg shadow-md transition-all duration-300 hover:bg-gray-800 hover:shadow-lg"
             >
               {copied ? "✅ Copied!" : "Copy URL"}
             </button>
           </div>
 
-          <a href={"/admin"} target="_blank" rel="noopener noreferrer" className="mt-5 bg-gray-800 text-white max-sm:py-1 max-sm:w-76 py-3 w-full rounded-lg shadow-md transition-all duration-300 hover:bg-gray-900 hover:scale-105 hover:shadow-xl">
-            Manage Site
+          <a href={"/admin"} target="_blank" rel="noopener noreferrer" className="mt-5 bg-gray-800 text-white max-sm:py-1 max-sm:w-76 py-3 w-full rounded-lg shadow-md transition-all duration-300 hover:bg-gray-900 hover:shadow-xl">
+            Manage Site ➚
           </a>
         </div>
       </div> : <></>
       }
 
       {/* // {how to works} */}
-      <div className="bg-gray-100 min-h-[40vh] mt-9 flex items-center justify-center">
-        <section className="bg-gradient-to-b from-gray-200 to-gray-100 text-center xl:pt-16 px-6 w-full">
+      <div id="how-it-works" className="bg-gray-100 min-h-[40vh] flex items-center justify-center">
+        <section className="bg-gradient-to-b from-gray-200 to-gray-100 text-center pt-8 xl:pt-16 px-6 w-full">
           <motion.h2
             className="xl:text-5xl text-3xl font-extrabold text-gray-800 xl:mb-16 mb-6 animate-fade-in"
             initial={{ opacity: 0, y: -20 }}
@@ -199,7 +225,7 @@ export default function Home() {
       </div>
 
       {/* why choose us */}
-      <div className="bg-gray-100 py-16 px-6 md:px-12 w-full">
+      <div id="features" className="bg-gray-100 py-16 px-6 md:px-12 w-full">
         {/* Section Title */}
         <motion.h2
           className="xl:text-5xl text-3xl font-extrabold text-center text-gray-900 mb-12"
@@ -234,7 +260,7 @@ export default function Home() {
 
 
       {/* templates */}
-      <div className="p-6 sm:p-10 bg-gray-200 relative">
+      <div id="templates" className="p-6 sm:p-10 bg-gray-200 relative sm:min-h-[85vh]">
         {/* Section Title */}
         <h2 className="text-3xl sm:text-5xl font-extrabold text-center text-gray-900 mb-8 sm:mb-12">
           Our Templates
@@ -311,118 +337,108 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-center min-h-[30vh] bg-gradient-to-br from-gray-200 via-gray-400 to-gray-100 text-center py-16 px-6">
-  <div className="p-4 sm:p-8 rounded-2xl shadow-2xl bg-gray-500 text-center max-w-full sm:max-w-md lg:max-w-2xl transform transition duration-500 hover:scale-105">
-    <h2 className="text-x sm:text-2xl lg:text-3xl text-white drop-shadow-lg">
-    Your feedback helps us improve — feel free to share your suggestions or report any issues.
-    </h2>
-    <form
-      action="https://api.web3forms.com/submit"
-      method="POST"
-      className="mt-6 space-y-4"
-    >
-      <input
-        type="hidden"
-        name="access_key"
-        value="7e5fb86d-ac04-4e8c-9e94-1ce3026b0790"
-      />
-      <input
-        type="text"
-        name="name"
-        placeholder="Your Name"
-        required
-        className="w-full sm:px-4 p-1 sm:py-3 bg-gray-800 text-white border-none rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Your Email"
-        required
-        className="w-full sm:px-4 p-1 sm:py-3 bg-gray-800 text-white border-none rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-      />
-      <textarea
-        name="message"
-        placeholder="Your Feedback or Suggestion"
-        required
-        rows="4"
-        className="w-full sm:px-4 p-1 sm:py-3 bg-gray-800 text-white border-none rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"
-      ></textarea>
-      <button
-        type="submit"
-        className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white sm:py-3 py-1 rounded-xl shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
-      >
-        Send Feedback →
-      </button>
-    </form>
-    <p className="mt-4 text-gray-400 text-sm">
-      We appreciate your input — it helps us improve.
-    </p>
-  </div>
-</div>
+      <footer id="contact" className="bg-gray-800 text-white py-6 sm:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
+          {/* Top Section: About & Contact */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
 
-<footer className="bg-gray-800 text-white py-6 sm:py-8">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    {/* Top Section: About & Contact */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-      
-      {/* About Section */}
-      <div className="text-left px-4 sm:px-8">
-        <h3 className="text-lg sm:text-xl font-semibold mb-3">About Launch My Biz</h3>
-        <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-          <span className="font-semibold">Launch My Biz</span> empowers small shop owners to create stunning websites effortlessly. 
-          Our platform bridges the gap between local businesses and the digital world by providing customizable templates 
-          that reflect each brand's unique identity.
-        </p>
-        <p className="mt-2 text-sm sm:text-base text-gray-300 leading-relaxed">
-          Whether you're a budding entrepreneur or an established business, we help you create a professional online presence 
-          with minimal effort and maximum impact.
-        </p>
-      </div>
+            {/* About Section */}
+            <div className="text-left px-4 sm:px-8">
+              <h3 className="text-lg sm:text-xl font-semibold mb-3">About Launch My Biz</h3>
+              <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                <span className="font-semibold">Launch My Biz</span>empowers small shop owners to create stunning websites effortlessly. Our platform bridges the gap between local businesses and the digital world by providing customizable templates that reflect each brand's unique identity.
+              </p>
+              <p className="mt-2 text-sm sm:text-base text-gray-300 leading-relaxed">
+                Whether you're just starting out or already running a business, we make building your online presence easy and fun. Customize your site, update your content in real-time, and reach more customers without touching a single line of code. Launch My Biz is here to help your brand shine online and grow with confidence every step of the way. Discover new ways to connect with your audience, showcase your products, and tell your story.
+              </p>
 
-      {/* Contact Information */}
-      <div className="text-left px-4 sm:px-8">
-        <h3 className="text-lg sm:text-xl font-semibold mb-3">Contact Us</h3>
-        <p className="text-sm sm:text-base text-gray-300">
-          📧 Email: <a href="mailto:contact@launchmybiz.com" className="hover:text-white">anubhavmishra2408@gmail.com</a>
-        </p>
-        <p className="mt-2 text-sm sm:text-base text-gray-300">
-          📞 Phone: <a href="tel:+919999999999" className="hover:text-white">+91 99999 99999</a>
-        </p>
-        <p className="mt-2 text-sm sm:text-base text-gray-300">
-          📍 Location: Panipat, India
-        </p>
-      </div>
-    </div>
+              {/* Contact Information */}
+              <h3 className="text-lg sm:text-xl font-semibold mt-4 mb-3">Contact Us</h3>
+              <p className="text-sm sm:text-base text-gray-300">
+                📧 Email: <a href="mailto:contact@launchmybiz.com" className="hover:text-white">anubhavmishra2408@gmail.com</a>
+              </p>
+              <p className="mt-2 text-sm sm:text-base text-gray-300">
+                📞 Phone: <a href="tel:+919999999999" className="hover:text-white">+91 99999 99999</a>
+              </p>
+              <p className="mt-2 text-sm sm:text-base text-gray-300">
+                📍 Location: Panipat, India
+              </p>
+            </div>
 
-    {/* Divider */}
-    <hr className="border-gray-600 my-4" />
+            <div className="text-left px-4 sm:px-8">
+              <div className="p-4 sm:p-8 rounded-2xl shadow-2xl bg-gray-500 text-center max-w-full sm:max-w-md lg:max-w-2xl transform transition duration-500 hover:scale-105">
+                <h2 className="sm:text-lg lg:text-xl text-white drop-shadow-lg">
+                  Your feedback helps us improve — feel free to share your suggestions or report any issues.
+                </h2>
+                <form
+                  action="https://api.web3forms.com/submit"
+                  method="POST"
+                  className="sm:mt-6 mt-2 space-y-4"
+                >
+                  <input
+                    type="hidden"
+                    name="access_key"
+                    value="7e5fb86d-ac04-4e8c-9e94-1ce3026b0790"
+                  />
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    required
+                    className="w-full sm:px-4 p-1 sm:py-3 bg-gray-800 text-white border-none rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    required
+                    className="w-full sm:px-4 p-1 sm:py-3 bg-gray-800 text-white border-none rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  />
+                  <textarea
+                    name="message"
+                    placeholder="Your Feedback or Suggestion"
+                    required
+                    className="w-full sm:px-4 p-1 sm:py-3 bg-gray-800 text-white border-none rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"
+                  ></textarea>
+                  <button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white sm:py-3 py-1 rounded-xl shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+                  >
+                    Send Feedback →
+                  </button>
+                </form>
+                <p className="mt-4 text-gray-400 text-sm">
+                  We appreciate your input — it helps us improve.
+                </p>
+              </div>
+            </div>
+          </div>
 
-    {/* Bottom Section: Social Media & Copyright */}
-    <div className="flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8">
-      
-      {/* Social Media Icons */}
-      <div className="flex items-center gap-4 mb-3 sm:mb-0">
-        <span className="text-gray-400">Follow Us:</span>
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-          <Facebook size={24} />
-        </a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-          <Twitter size={24} />
-        </a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-          <Instagram size={24} />
-        </a>
-      </div>
-
-      {/* Copyright */}
-      <p className="text-gray-400 text-sm sm:text-base">
-        &copy; 2025 <span className="font-semibold">Launch My Biz</span>. All rights reserved.
-      </p>
-    </div>
-  </div>
-</footer>
+          {/* Divider */}
+          <hr className="border-gray-600 my-4" />
+          {/* Bottom Section: Social Media & Copyright */}
+          <div className="flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8">
+            {/* Social Media Icons */}
+            <div className="flex items-center gap-4 mb-3 sm:mb-0">
+              <span className="text-gray-400">Follow Us:</span>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <Facebook size={24} />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <Twitter size={24} />
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+                <Instagram size={24} />
+              </a>
+            </div>
+            {/* Copyright */}
+            <p className="text-gray-400 text-sm sm:text-base">
+              &copy; 2025 <span className="font-semibold">Launch My Biz</span>. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

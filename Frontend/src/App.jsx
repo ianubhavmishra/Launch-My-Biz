@@ -10,7 +10,8 @@ import ClinicTemplate from "./pages/templates/ClinicTemplate.jsx";
 import ClothingShopTemplate from "./pages/templates/ClothingShopTemplate.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
 import { Toaster } from "react-hot-toast";
-
+import FloatingChatbot from "react-floatbot";
+import 'react-floatbot/dist/index.css';
 
 function App() {
 
@@ -28,7 +29,25 @@ function App() {
         <Route path="/temp4" element={<ClinicTemplate />} />
         <Route path="/temp5" element={<ClothingShopTemplate />} />
         <Route path="*" element={<h1>404 - Page Not Found</h1>} />
-      </Routes>
+        </Routes>
+        <FloatingChatbot
+        apiKey={import.meta.env.VITE_API_KEY}
+        modelName="gemini-2.0-flash"
+        initialMessage="Hello! How can I help you today?"
+        botName="Launch MY Biz-AI Assistant"
+        position="bottom-right"
+        theme={{
+          primaryColor: "#4F46E5",
+          userBubbleColor: "#4F46E5",
+          botBubbleColor: "#E0E7FF",
+          backgroundColor: "#f3f4f6",
+        }}
+        width={350}
+        height={500}
+        headerText="Launch MY Biz-AI Assistant"
+        placeholderText="Ask me anything..."
+        isOpenOnLoad={false}
+      />
    </div>
   )
 }
