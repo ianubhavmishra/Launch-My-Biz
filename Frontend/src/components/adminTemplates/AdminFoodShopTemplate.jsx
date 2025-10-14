@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useContext } from "react";
-import {Store_context} from "../context/Storecontext";
+import { Store_context } from "../context/Storecontext";
 import { Trash2, Plus, Menu, X } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
 import axios from "axios";
@@ -77,40 +77,40 @@ const FoodStoreLanding = () => {
   }
 
   // Create a debounced version of updateShopDetails with toast
-const debouncedUpdate = useCallback(
-  debounce(async (field, value) => {
-    const success = await updateShopDetails(field, value);
+  const debouncedUpdate = useCallback(
+    debounce(async (field, value) => {
+      const success = await updateShopDetails(field, value);
 
-    const fieldMap = {
-      products: "Menu items",
-      footer: "Contact details",
-      siteName: "Store Name",
-      welcomeText: "Welcome text",
-      tagline: "Tagline"
-    };
+      const fieldMap = {
+        products: "Menu items",
+        footer: "Contact details",
+        siteName: "Store Name",
+        welcomeText: "Welcome text",
+        tagline: "Tagline"
+      };
 
-    if (success) {
-      toast.success(`${fieldMap[field] || field} updated successfully!`, {
-        duration: 3000,
-        style: {
-          borderRadius: "10px",
-          background: "#e6fffa",
-          color: "#2c7a7b",
-        },
-      });
-    } else {
-      toast.error(`Failed to update ${fieldMap[field] || field}`, {
-        duration: 3000,
-        style: {
-          borderRadius: "10px",
-          background: "#ffe6e6",
-          color: "#b91c1c",
-        },
-      });
-    }
-  }, 1500),
-  []
-);
+      if (success) {
+        toast.success(`${fieldMap[field] || field} updated successfully!`, {
+          duration: 3000,
+          style: {
+            borderRadius: "10px",
+            background: "#e6fffa",
+            color: "#2c7a7b",
+          },
+        });
+      } else {
+        toast.error(`Failed to update ${fieldMap[field] || field}`, {
+          duration: 3000,
+          style: {
+            borderRadius: "10px",
+            background: "#ffe6e6",
+            color: "#b91c1c",
+          },
+        });
+      }
+    }, 1500),
+    []
+  );
 
   //image upload function for cloudinary
   const uploadToBackend = async (file) => {
@@ -227,7 +227,7 @@ const debouncedUpdate = useCallback(
             <input
               type="text"
               value={siteName}
-              onChange={(e) => setSiteName(e.target.value)}
+              onChange={(e) => { setSiteName(e.target.value); debouncedUpdate("siteName", e.target.value); }}
               className="text-lg sm:text-2xl font-bold text-orange-800 bg-transparent border-none focus:outline-none"
             />
           </div>
@@ -277,9 +277,9 @@ const debouncedUpdate = useCallback(
           </>
           <a href="#contact">
             <button className="sm:mt-6 mt-3 px-3 sm:px-6 py-1 sm:py-2 bg-orange-600 text-white rounded-full hover:bg-orange-700">
-            Visit Now
-          </button>
-            </a>
+              Visit Now
+            </button>
+          </a>
         </div>
 
         <div className="w-full md:w-1/2 flex justify-center relative">
@@ -301,116 +301,116 @@ const debouncedUpdate = useCallback(
 
       {/* Menu Section */}
       <section id="menu" className="sm:py-12 bg-orange-100">
-      <h3 className="sm:text-3xl text-2xl text-center font-bold text-orange-800 sm:mb-8 mb-5">Our Menu</h3>
+        <h3 className="sm:text-3xl text-2xl text-center font-bold text-orange-800 sm:mb-8 mb-5">Our Menu</h3>
 
-      <div className="flex justify-center mb-6">
-        <button
-          onClick={() => setShowAddMenu(!showAddMenu)}
-          className="bg-orange-600 text-white px-2 py-1 sm:px-4 sm:py-3 rounded-md flex items-center hover:bg-orange-700"
-        >
-          <Plus size={20} className="mr-2" /> Add Menu Item
-        </button>
-      </div>
-
-      {showAddMenu && (
-        <div className="mb-6 p-4 bg-white rounded-lg shadow-md w-full max-w-xl mx-auto">
-          <input
-            type="text"
-            placeholder="Item Name"
-            value={newProduct.name}
-            onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-            className="w-full p-2 border mb-2 text-lg placeholder:text-base"
-          />
-          {!newProduct.name && showErrors && <p className="text-red-500 text-sm">Name is required</p>}
-
-          <input
-            type="number"
-            placeholder="Price"
-            value={newProduct.price}
-            onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
-            className="w-full p-2 border mb-2 text-lg placeholder:text-base"
-          />
-          {!newProduct.price && showErrors && <p className="text-red-500 text-sm">Price is required</p>}
-
-          <input
-                type="file"
-                accept="image/*"
-                onChange={async (e) => {
-                  const file = e.target.files[0];
-                  if (!file) return;
-
-                  const toastId = toast.loading("Uploading product image...");
-                  const imageUrl = await uploadToBackend(file);
-
-                  if (imageUrl) {
-                    setNewProduct({ ...newProduct, image: imageUrl });
-                    toast.success("Image uploaded!", { id: toastId });
-                  } else {
-                    toast.error("Image upload failed.", { id: toastId });
-                  }
-                }}
-                className="w-full p-2 border mb-2"
-              />
-              {!newProduct.image && showErrors && (
-                <p className="text-red-500 text-sm">Product image is required</p>
-              )}
-
+        <div className="flex justify-center mb-6">
           <button
-            onClick={() => {
-              if (!newProduct.name || !newProduct.price || !newProduct.image) {
-                setShowErrors(true);
-                return;
-              }
-              setShowErrors(false);
-              addNewProduct();
-            }}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full"
+            onClick={() => setShowAddMenu(!showAddMenu)}
+            className="bg-orange-600 text-white px-2 py-1 sm:px-4 sm:py-3 rounded-md flex items-center hover:bg-orange-700"
           >
-            Save Item
+            <Plus size={20} className="mr-2" /> Add Menu Item
           </button>
         </div>
-      )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6">
-        {(products || []).map((item, index) => (
-          <div key={index} className="bg-white rounded-xl shadow-md p-4 text-center relative">
-            <button onClick={() => removeProduct(item.id)} className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-700 z-10">
-              <Trash2 size={16} />
+        {showAddMenu && (
+          <div className="mb-6 p-4 bg-white rounded-lg shadow-md w-full max-w-xl mx-auto">
+            <input
+              type="text"
+              placeholder="Item Name"
+              value={newProduct.name}
+              onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+              className="w-full p-2 border mb-2 text-lg placeholder:text-base"
+            />
+            {!newProduct.name && showErrors && <p className="text-red-500 text-sm">Name is required</p>}
+
+            <input
+              type="number"
+              placeholder="Price"
+              value={newProduct.price}
+              onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+              className="w-full p-2 border mb-2 text-lg placeholder:text-base"
+            />
+            {!newProduct.price && showErrors && <p className="text-red-500 text-sm">Price is required</p>}
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const toastId = toast.loading("Uploading product image...");
+                const imageUrl = await uploadToBackend(file);
+
+                if (imageUrl) {
+                  setNewProduct({ ...newProduct, image: imageUrl });
+                  toast.success("Image uploaded!", { id: toastId });
+                } else {
+                  toast.error("Image upload failed.", { id: toastId });
+                }
+              }}
+              className="w-full p-2 border mb-2"
+            />
+            {!newProduct.image && showErrors && (
+              <p className="text-red-500 text-sm">Product image is required</p>
+            )}
+
+            <button
+              onClick={() => {
+                if (!newProduct.name || !newProduct.price || !newProduct.image) {
+                  setShowErrors(true);
+                  return;
+                }
+                setShowErrors(false);
+                addNewProduct();
+              }}
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 w-full"
+            >
+              Save Item
             </button>
+          </div>
+        )}
 
-            <div className="relative cursor-pointer" onClick={() => menuImageRefs.current[index].click()}>
-              <img src={item.image} alt={item.name} className="w-full h-56 object-cover rounded-lg" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6">
+          {(products || []).map((item, index) => (
+            <div key={index} className="bg-white rounded-xl shadow-md p-4 text-center relative">
+              <button onClick={() => removeProduct(item.id)} className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-700 z-10">
+                <Trash2 size={16} />
+              </button>
+
+              <div className="relative cursor-pointer" onClick={() => menuImageRefs.current[index].click()}>
+                <img src={item.image} alt={item.name} className="w-full h-56 object-cover rounded-lg" />
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  ref={(el) => (menuImageRefs.current[index] = el)}
+                  onChange={(e) => handleImageUpload(item.id, e)}
+                />
+              </div>
+
               <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                ref={(el) => (menuImageRefs.current[index] = el)}
-                onChange={(e) => handleImageUpload(item.id, e)}
+                value={item.name}
+                onChange={(e) => {
+                  const updated = [...products];
+                  updated[index].name = e.target.value;
+                  handleInputChange(updated);
+                }}
+                className="mt-4 text-xl font-semibold text-orange-800 text-center bg-transparent outline-none"
+              />
+              <input
+                value={item.price}
+                onChange={(e) => {
+                  const updated = [...products];
+                  updated[index].price = e.target.value;
+                  handleInputChange(updated);
+                }}
+                className="text-orange-600 text-center bg-transparent outline-none"
               />
             </div>
-
-            <input
-              value={item.name}
-              onChange={(e) => {
-                const updated = [...products];
-                updated[index].name = e.target.value;
-                handleInputChange(updated);
-              }}
-              className="mt-4 text-xl font-semibold text-orange-800 text-center bg-transparent outline-none"
-            />
-            <input
-              value={item.price}
-              onChange={(e) => {
-                const updated = [...products];
-                updated[index].price = e.target.value;
-                handleInputChange(updated);
-              }}
-              className="text-orange-600 text-center bg-transparent outline-none"
-            />
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
 
       {/* Contact Section */}
       <section id="contact" className="sm:py-12 p-8 px-6 bg-orange-100">

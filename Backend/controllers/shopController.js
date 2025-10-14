@@ -1,3 +1,4 @@
+import { application } from 'express';
 import shopModel from '../models/shopModel.js'
 import { generateShopUrl } from '../utils/generateShopURL.js'
 
@@ -17,7 +18,7 @@ async function addShop(req, res) {
     try { 
         const savedShop = await shop.save();
         
-        // Call generateUrl function with the necessary parameter (e.g., savedShop._id or savedShop.siteName)
+        // Call generateUrl function with the necessary parameter
         const shopUrl = generateShopUrl(savedShop.siteName);
 
         // Update shop with generated URL
