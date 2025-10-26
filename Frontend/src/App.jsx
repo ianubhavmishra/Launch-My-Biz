@@ -12,6 +12,7 @@ import AdminDashboard from "./pages/AdminDashboard.jsx";
 import { Toaster } from "react-hot-toast";
 import FloatingChatbot from "react-floatbot";
 import 'react-floatbot/dist/index.css';
+import Payment from "./pages/payment.jsx";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       <Toaster position="bottem-right" reverseOrder={false} />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/payment" element={<Payment/>} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/reg" element={<ShopForm />} />
         <Route path="/shop/:slug" element={<ShopPage />} />

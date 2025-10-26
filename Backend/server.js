@@ -2,22 +2,24 @@ import express from "express";
 import cors from "cors"
 import { connectDB } from "./config/db.js";
 import shopRouter from "./routes/shopRoute.js";
-import dotenv from "dotenv";
+import paymentRouter from "./routes/payment.js";
 
 //app config
-const app = express()
+const app = express();
 const port = 4000
 export const frontendURl = "https://launch-my-biz-s8b9.onrender.com"
 
 //middelware
 
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cors());
 
 //db connection
 connectDB();
 // Api endpoint
-app.use("/shop", shopRouter)
+app.use("/shop", shopRouter);
+app.use("/payment", paymentRouter);
+
 
 app.get("/", (req, res) => {
    res.send("api working")

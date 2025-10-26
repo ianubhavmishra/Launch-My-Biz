@@ -71,7 +71,7 @@ const StoreForm = () => {
     toast.success("🎉 Website created successfully!", {
       duration: 3000,
     });
-    navigate("/")
+    navigate("/payment")
   };
 
   return isSignedIn ? (
