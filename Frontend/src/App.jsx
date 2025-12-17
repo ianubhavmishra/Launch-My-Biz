@@ -32,7 +32,7 @@ function App() {
         </Routes>
         <FloatingChatbot
         apiKey={import.meta.env.VITE_API_KEY}
-        modelName="gemini-2.0-flash"
+        modelName="gemini-flash-latest"
         initialMessage="Hello! How can I help you today?"
         botName="Launch MY Biz-AI Assistant"
         position="bottom-right"
